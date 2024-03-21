@@ -73,12 +73,13 @@ $(document).ready(function() {
             $.ajax({
                 url : 'http://localhost:8000/register.php',
                 method: 'POST',
-                data : formData,
-                success : function(e){
+                data : $("#signupForm").serialize(),
+                success : function(res){
+                    console.log(res)
                     alert("success")
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    console.log(errorThrown); 
+                },error: function(xhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                    alert('Signup failed: ' + errorThrown); 
                 }
             })
     })

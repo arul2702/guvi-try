@@ -1,24 +1,33 @@
 <?php
+    $host = 'localhost'; // XAMPP usually has MySQL running on localhost
+    $dbname = 'guvi_arul';
+    $username = 'root'; // Default username for XAMPP MySQL
+    $password = ''; // Default password for XAMPP MySQL is empty
+    echo "helloworld"; // added semicolon here
 
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: POST"); // Adjust allowed HTTP methods as needed
-    header("Access-Control-Allow-Headers: Content-Type");
-// Check if the request is a POST request
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve form data
-        // Do some processing with the data (e.g., save to a database)
-        // Here, we're just echoing back a response
-        // Database connection parameters
-        $host = 'localhost'; // XAMPP usually has MySQL running on localhost
-        $dbname = 'guvi-db';
-        $username = 'root'; // Default username for XAMPP MySQL
-        $password = ''; // Default password for XAMPP MySQL is empty
-        
-        // Create a connection
-        $conn = new mysqli($host, $username, $password, $dbname);
-        $sql = "INSERT INTO signup(firstName,last_name)"
+    // Create a connection
+    $conn = new mysqli($host, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $phone_number = $_POST['phone_number'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+
+    $sql = "INSERT INTO user (first_name,last_name,phone_number,dob,gender,password, email) VALUES ('$first_name', '$last_name', '$phone_number','$dob',
+        '$gender','$password','$email')";
+    if ($conn->query($sql) === TRUE) {
+        echo "New user created successfully";
     } else {
-        // If not a POST request, return an error message
-        echo "Error: Invalid request method";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
+
+    $conn->close();
+    
 ?>
