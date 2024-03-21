@@ -1,4 +1,10 @@
 <?php
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: POST"); // Adjust allowed HTTP methods as needed
+    header("Access-Control-Allow-Headers: Content-Type");
+    
+    
+    
     $host = 'localhost'; // XAMPP usually has MySQL running on localhost
     $dbname = 'guvi_arul';
     $username = 'root'; // Default username for XAMPP MySQL
