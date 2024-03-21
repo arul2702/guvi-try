@@ -66,18 +66,19 @@ $(document).ready(function() {
             }
         }
     });
-    $("#signupbtn").click(function(){
+    $("#signupbtn").click(function(e){
             e.preventDefault();
+            var formData = $("#signupForm").serialize()
+            console.log(formData)
             $.ajax({
-                url : 'php/register.php',
+                url: 'http://localhost:8000/register.php',
                 method: 'POST',
-                data : $("#signupForm").serialize(),
+                data : formData,
                 success : function(){
                     alert("success")
-                    console.log('nnnn')
-                },error: function(xhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
-                    alert('Signup failed: ' + errorThrown); 
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log(errorThrown); 
                 }
             })
     })
