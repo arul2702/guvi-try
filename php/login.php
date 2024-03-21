@@ -1,33 +1,37 @@
 <?php
-   header("Access-Control-Allow-Origin: *");
-   header("Access-Control-Allow-Methods: POST"); // Adjust allowed HTTP methods as needed
-   header("Access-Control-Allow-Headers: Content-Type");
-   
-   // Database connection parameters
-    $host = 'localhost'; // XAMPP usually has MySQL running on localhost
-    $dbname = 'guvi_arul';
-    $username = 'root'; // Default username for XAMPP MySQL
-    $password = ''; // Default password for XAMPP MySQL is empty
+// Connect to Redis server
+// $redis = new Redis();
+// $redis->connect('127.0.0.1', 6379); // Assuming Redis is running on localhost
 
-    $conn = new mysqli($host, $username, $password, $dbname);
+// // Function to create a session token
+// function createSessionToken($username) {
+//     return md5($username . time() . rand());
+// }
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+// // Function to store session information in Redis
+// function storeSessionInfo($token, $username) {
+//     global $redis;
+//     $redis->setex($token, 3600, $username); // Store session info for 1 hour
+// }
 
+// // Function to validate session token
+// function validateSessionToken($token) {
+//     global $redis;
+//     return $redis->exists($token);
+// }
+
+// Handle login request
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    $query = "SELECT * FROM user WHERE email='$email' AND password='$password'";
-    $result = $conn->query($query)
-
-    if ($result->num_rows ==1) {
-        header("Location : profile.html")
-        echo "Login in successfully";
-    } else {
-        echo "Error: " . $result->error;
-    }
-    $result->close();
-    $conn->close();
+    // Validate username and password (e.g., authenticate against a database)
+    // For simplicity, assuming login is successful
+    
+    // Create session token and store session info in Redis
+    // $token = createSessionToken($username);
+    // storeSessionInfo($token, $username);
+    
+    // Return session token to client
+    echo $email;
+}
 ?>
