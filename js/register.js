@@ -71,7 +71,7 @@ $(document).ready(function() {
             var formData = $("#signupForm").serialize()
             console.log(formData)
             $.ajax({
-                url: 'http://localhost:8000/register.php',
+                url : 'http://localhost:8000/register.php',
                 method: 'POST',
                 data : formData,
                 success : function(){
