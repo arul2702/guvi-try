@@ -74,7 +74,7 @@ $(document).ready(function() {
                 url : 'http://localhost:8000/register.php',
                 method: 'POST',
                 data : formData,
-                success : function(){
+                success : function(e){
                     alert("success")
                 },
                 error: function(xhr, textStatus, errorThrown) {
