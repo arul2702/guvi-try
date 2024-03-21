@@ -22,9 +22,8 @@
 
 // Handle login request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['email'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
-    print_r($username)
     // Validate username and password (e.g., authenticate against a database)
     // For simplicity, assuming login is successful
     
@@ -33,6 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // storeSessionInfo($token, $username);
     
     // Return session token to client
-    echo `success`;
+    echo $email;
 }
 ?>
