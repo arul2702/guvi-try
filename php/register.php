@@ -17,7 +17,7 @@
     }
 
 
-    $sql = "INSERT INTO user (first_name, last_name, phone_number, dob, gender, password, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (username, password, email) VALUES (?, ?, ?)";
 
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -28,13 +28,8 @@
     }
 
     // Bind parameters
-    $stmt->bind_param("sssssss", $first_name, $last_name, $phone_number, $dob, $gender, $password, $email);
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $phone_number = $_POST['phone_number'];
-    $dob = $_POST['dob'];
-    $email = $_POST['email'];
-    $gender = $_POST['gender'];
+    $stmt->bind_param("sss", $username, $password, $email);
+    $username = $_POST['username'];
     $password = $_POST['password'];
     $email = $_POST['email'];
     $stmt->execute();

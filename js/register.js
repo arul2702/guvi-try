@@ -1,25 +1,9 @@
 $(document).ready(function() {
     $('#signupForm').validate({
         rules: {
-            first_name: {
+            username: {
                 required: true,
                 minlength: 4
-            },
-            last_name: {
-                required: true,
-                minlength: 1
-            },
-            phone_number: {
-                required: true,
-                minlength: 8,
-                number: true,
-            },
-            dobinp: {
-                required: true,
-                date: true 
-            },
-            gender: {
-                required: true,
             },
             email: {
                 required: true,
@@ -36,25 +20,9 @@ $(document).ready(function() {
             }
         },
         messages: {
-            first_name: {
-                required: "Please enter your first name",
+            username: {
+                required: "Please enter your username name",
                 minlength: "Your first name must consist of at least 4 characters"
-            },
-            last_name: {
-                required: "Please enter your last name",
-                minlength: "Your last name must consist of at least 1 character"
-            },
-            phone_number: {
-                required: "Please enter your phone number",
-                minlength: "Your phone number must be at least 8 digits long",
-                number: "Please enter a valid phone number"
-            },
-            dobinp: {
-                required: "Please enter your date of birth",
-                date: "Please enter a valid date"
-            },
-            gender: {
-                required: "Please select your gender",
             },
             email: {
                 required: "Please enter your email address",
@@ -66,21 +34,26 @@ $(document).ready(function() {
             }
         }
     });
+    
     $("#signupbtn").click(function(e){
-            e.preventDefault();
-            var formData = $("#signupForm").serialize()
-            console.log(formData)
+        e.preventDefault();
+        // Check if the form is valid
+        if ($('#signupForm').valid()) {
             $.ajax({
                 url : 'http://localhost:8000/register.php',
                 method: 'POST',
                 data : $("#signupForm").serialize(),
                 success : function(res){
-                    console.log(res)
-                    alert("success")
-                },error: function(xhr, textStatus, errorThrown) {
+                    console.log(res);
+                    alert("Signup successful!");
+                },
+                error: function(xhr, textStatus, errorThrown) {
                     console.log(errorThrown);
                     alert('Signup failed: ' + errorThrown); 
                 }
-            })
-    })
+            });
+        } else {
+            alert("Please fill in all required fields correctly.");
+        }
+    });
 });
