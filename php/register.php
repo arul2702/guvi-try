@@ -1,16 +1,33 @@
 <?php
-// Check if the request is a POST request
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve form data
-        $name = $_POST['first_name'];
-        $email = $_POST['last_name'];
-        // Do some processing with the data (e.g., save to a database)
-        // Here, we're just echoing back a response
-        echo "Form submitted successfully! <br>";
-        echo "Name: $name <br>";
-        echo "Email: $email";
+    $host = 'localhost'; // XAMPP usually has MySQL running on localhost
+    $dbname = 'guvi_arul';
+    $username = 'root'; // Default username for XAMPP MySQL
+    $password = ''; // Default password for XAMPP MySQL is empty
+    echo "helloworld"; // added semicolon here
+
+    // Create a connection
+    $conn = new mysqli($host, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $phone_number = $_POST['phone_number'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+
+    $sql = "INSERT INTO user (first_name,last_name,phone_number,dob,gender,password, email) VALUES ('$first_name', '$last_name', '$phone_number','$dob',
+        '$gender','$password','$email')";
+    if ($conn->query($sql) === TRUE) {
+        echo "New user created successfully";
     } else {
-        // If not a POST request, return an error message
-        echo "Error: Invalid request method";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
+
+    $conn->close();
+    
 ?>

@@ -72,9 +72,9 @@ $(document).ready(function() {
                 url : 'http://localhost:8000/register.php',
                 method: 'POST',
                 data : $("#signupForm").serialize(),
-                success : function(){
+                success : function(res){
+                    console.log(res)
                     alert("success")
-                    console.log('nnnn')
                 },error: function(xhr, textStatus, errorThrown) {
                     console.log(errorThrown);
                     alert('Signup failed: ' + errorThrown); 
