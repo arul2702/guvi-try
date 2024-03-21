@@ -21,4 +21,27 @@ $(document).ready(function() {
             }
         }
     });
+    $("#loginbtn").click(function(e){
+        e.preventDefault();
+        console.log("clickcsssss" )
+        // Check if the form is valid
+        if ($('#loginForm').valid()) {
+            console.log("valid")
+            $.ajax({
+                url : 'http://localhost:8000/login.php',
+                method: 'POST',
+                data : $("#loginForm").serialize(),
+                success : function(res){
+                    console.log(res);
+                    alert("Login successful!");
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                    alert('Login failed: ' + errorThrown); 
+                }
+            });
+        } else {
+            alert("Please fill in all required fields correctly.");
+        }
+    });
 });
