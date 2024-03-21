@@ -66,10 +66,10 @@ $(document).ready(function() {
             }
         }
     });
-    $("#signupbtn").click(function(){
+    $("#signupbtn").click(function(e){
             e.preventDefault();
             $.ajax({
-                url : 'php/register.php',
+                url : 'http://localhost:8000/register.php',
                 method: 'POST',
                 data : $("#signupForm").serialize(),
                 success : function(){
