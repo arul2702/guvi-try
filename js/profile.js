@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#signupForm').validate({
+    $('#profileForm').validate({
         rules: {
             first_name: {
                 required: true,
@@ -65,23 +65,27 @@ $(document).ready(function() {
                 minlength: "Your password must be at least 6 characters long"
             }
         },
-        // Form submission handler
-        submitHandler: function(form) {
-            // AJAX submission
+    });
+     
+    $("#profilebtn").click(function(e){
+        e.preventDefault();
+        if ($('#profileForm').valid()) {
             $.ajax({
-                type: "POST",
-                url: "path/to/your/signup/endpoint",
-                data: $(form).serialize(), // Serialize form data
-                success: function(response) {
-                    // Handle success
-                    alert('Signup successful!'); // Example response handling
-                    // You might want to redirect the user or show a success message
+                url : 'http://localhost:8000/profile.php',
+                method: 'POST',
+                data : $("#profileForm").serialize(),
+                success : function(res){
+                    console.log(res);
+                    alert("Profile Updated successful!");
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    // Handle error
-                    alert('Signup failed: ' + errorThrown); // Example error handling
+                    console.log(errorThrown);
+                    alert('Profile Updated successful!'); 
                 }
             });
+        } else {
+            alert("Please fill in all required fields correctly.");
         }
     });
+
 });
