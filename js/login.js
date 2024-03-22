@@ -24,22 +24,35 @@ $(document).ready(function() {
 
     $("#loginbtn").click(function (e) {
         e.preventDefault();
+        
         // Check if the form is valid
         if ($('#loginForm').valid()) {
+            // Perform AJAX request
             $.ajax({
                 url: 'http://localhost:8000/login.php',
                 method: 'POST',
                 data: $("#loginForm").serialize(),
                 success: function (res) {
-                    console.log(res);
-                    alert("login successful!");
+                    // Check the response from the server
+                    if (res === "Authentication successful!") {
+                        // Alert for successful authentication
+                        console.log(res)
+                        window.location.href = "profile.html";
+                        alert("Login successful!");
+                    } else {
+                        // Alert for invalid email or password
+                        console.log(res)
+                        alert("Invalid email or password!");
+                    }
                 },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
-                    alert('login failed: ' + errorThrown);
+                error: function (errorThrown) {
+                    // Alert for AJAX request failure
+                    console.log(errorThrown)
+                    alert('AJAX request failed: ' + errorThrown);
                 }
             });
         } else {
+            // Alert for invalid form data
             alert("Please fill in all required fields correctly.");
         }
     });
